@@ -33,4 +33,26 @@ class MusicianHandler(ViewHandler):
     musicians = session.query(Musician).all()      
     return self.render("../musicians.html", musicians=musicians)
 
-  # def post(self, *args, **kwargs):
+  def post(self, *args, **kwargs):
+    musician_name = self.get_body_argument("name")
+    musician_url = self.get_body_argument("url")
+    musician = Musician(name=musician_name, live_info_url=musician_url)
+
+
+    USER = "root"
+    PW = ""
+    HOST = "localhost"
+    DB = "live_info_reader"
+    DATABASE = f'mysql://{USER}:{PW}@{HOST}/{DB}?charset=utf8'
+    ENGINE = create_engine(
+        DATABASE,
+        encoding="utf-8"
+    )
+    Session = sessionmaker(bind=ENGINE)
+    session = Session()
+    session.add(musician)
+    session.commit()
+
+    musicians = session.query(Musician).all()
+
+    self.redirect("/musicians")
