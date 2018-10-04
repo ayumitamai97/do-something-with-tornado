@@ -39,7 +39,7 @@ class LiveInfo(Base):
   __tablename__ = 'live_info'
 
   id = Column(Integer, primary_key=True)
-  content = Column(String(255))
+  content = Column(Text(4294000000))
   musician_id = Column(Integer, ForeignKey('musicians.id', onupdate='CASCADE', ondelete='CASCADE'))
 
 

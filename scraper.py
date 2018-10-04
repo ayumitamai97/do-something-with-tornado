@@ -11,7 +11,6 @@ except:
 print(soup.find("body"))
 
 USER = "root"
-# PW = os.environ['MYSQL_PW']
 HOST = "localhost"
 DB = "live_info_reader"
 DATABASE = f'mysql://{USER}:{PW}@{HOST}/{DB}?charset=utf8'
