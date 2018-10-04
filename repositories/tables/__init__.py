@@ -31,6 +31,7 @@ class Musician(Base):
 
   id = Column(Integer, primary_key=True)
   name = Column(String(255))
+  live_info_url = Column(String(255))
   live_info = relationship("LiveInfo")
 
 
