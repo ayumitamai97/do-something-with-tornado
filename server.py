@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import tornado.ioloop
 import tornado.web
+from handlers.musician import MusicianHandler
 
 class MainHandler(tornado.web.RequestHandler):
     def get(self):
@@ -8,6 +9,7 @@ class MainHandler(tornado.web.RequestHandler):
 
 application = tornado.web.Application([
     (r"/", MainHandler),
+    (r"/musicians", MusicianHandler),
 ])
 
 if __name__ == "__main__":

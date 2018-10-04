@@ -1,0 +1,16 @@
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>アーティスト名</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for musician in musicians %}
+      <tr>
+        <td>{{musician.id}}</td>
+        <td><a href="{{musician.live_info_url}}">{{musician.name}}</a></td>
+      </tr>
+    {% end %}
+  </tbody>
+</table>
