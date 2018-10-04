@@ -5,7 +5,7 @@ from handlers.musician import MusicianHandler
 
 class MainHandler(tornado.web.RequestHandler):
     def get(self):
-        self.render('index.html')
+        self.render('templates/index.html')
 
 application = tornado.web.Application([
     (r"/", MainHandler),

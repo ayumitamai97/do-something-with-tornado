@@ -31,7 +31,7 @@ class MusicianHandler(ViewHandler):
     session = Session()
 
     musicians = session.query(Musician).all()      
-    return self.render("../musicians.html", musicians=musicians)
+    return self.render("../templates/musicians.html", musicians=musicians)
 
   def post(self, *args, **kwargs):
     musician_name = self.get_body_argument("name")
