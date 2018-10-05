@@ -4,7 +4,7 @@ from handlers.musician import MusicianHandler
 
 def get_routes(**kwargs):
     routes = [
-        ('/?', IndexHandler, kwargs),
+        ('/?', FeedHandler, kwargs),
         ('/musisians/?', MusiciansHandler, kwargs),
     ]
     return routes
