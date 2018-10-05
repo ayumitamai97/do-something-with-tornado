@@ -1,4 +1,5 @@
 import requests
+from datetime import date
 from bs4 import BeautifulSoup
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
@@ -32,7 +33,10 @@ for musician in musicians:
     except:
         soup = BeautifulSoup(resp, "html5lib").get_text()
 
-    content = LiveInfo(musician_id=musician_id, content=soup)
+    content = LiveInfo(
+                musician_id=musician_id,
+                content=soup,
+                created_at=date.today())
 
     session.add(content)
 

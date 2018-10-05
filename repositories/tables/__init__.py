@@ -1,6 +1,6 @@
 # -*- encoding:utf-8 -*-
 
-from sqlalchemy import (Column, String, Text, ForeignKey, \
+from sqlalchemy import (Column, String, Text, Date, ForeignKey, \
                 create_engine, MetaData, DECIMAL, DATETIME, exc, event, Index)
 from sqlalchemy.schema import UniqueConstraint
 from sqlalchemy.orm import (sessionmaker, relationship, scoped_session)
@@ -42,6 +42,7 @@ class LiveInfo(Base):
   id = Column(Integer, primary_key=True)
   content = Column(Text(4294000000))
   musician_id = Column(Integer, ForeignKey('musicians.id', onupdate='CASCADE', ondelete='CASCADE'))
+  created_at = Column(Date)
 
 
 if __name__ == "__main__":
