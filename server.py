@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
-import tornado.ioloop
-import tornado.web
+# import tornado.ioloop
+# import tornado.web
+import tornado.wsgi
+import wsgiref.simple_server
 from handlers.musician import MusicianHandler
 from handlers.feed import FeedHandler
 import schedule
@@ -21,7 +23,6 @@ application = tornado.web.Application([
 ])
 
 if __name__ == "__main__":
-    server = tornado.httpserver.HTTPServer(application)
-    server.bind(8888)
-    server.start(0)  # forks one process per cpu
-    tornado.ioloop.IOLoop.current().start()
+    wsgi_app = tornado.wsgi.WSGIAdapter(application)
+    server = wsgiref.simple_server.make_server('', 8888, wsgi_app)
+    server.serve_forever()
