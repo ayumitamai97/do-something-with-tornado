@@ -21,6 +21,7 @@ application = tornado.web.Application([
 ])
 
 if __name__ == "__main__":
-    application.listen(8888)
-    tornado.ioloop.IOLoop.instance().start()
-
+    server = tornado.httpserver.HTTPServer(application)
+    server.bind(8888)
+    server.start(0)  # forks one process per cpu
+    tornado.ioloop.IOLoop.current().start()
