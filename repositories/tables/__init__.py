@@ -7,12 +7,12 @@ from sqlalchemy.orm import (sessionmaker, relationship, scoped_session)
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.dialects.mysql import INTEGER as Integer
 from datetime import datetime
-
+import os
 
 USER = "root"
 HOST = "localhost"
 DB = "live_info_reader"
-DATABASE = f'mysql://{USER}:@{HOST}/{DB}?charset=utf8'
+PW = os.environ['LIVE_INFO_PASSWORD']
 ENGINE = create_engine(
     DATABASE,
     encoding="utf-8",

@@ -14,6 +14,7 @@ def crawl():
     PW = ""
     HOST = "localhost"
     DB = "live_info_reader"
+    PW = os.environ['LIVE_INFO_PASSWORD']
     DATABASE = f'mysql://{USER}:{PW}@{HOST}/{DB}?charset=utf8'
     ENGINE = create_engine(
         DATABASE,
