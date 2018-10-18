@@ -7,14 +7,14 @@ from handlers.musician import MusicianHandler
 from handlers.feed import FeedHandler
 import schedule
 import time
-import scraper
+import crawler
 
 class MainHandler(tornado.web.RequestHandler):
     def get(self):
         self.render('templates/feed.html')
 
-# scraper.crawl()
-# schedule.every().day.at("0:50").do(scraper.crawl)
+# crawler.crawl()
+# schedule.every().day.at("0:50").do(crawler.crawl)
 
 application = tornado.web.Application([
     (r"/", MainHandler),

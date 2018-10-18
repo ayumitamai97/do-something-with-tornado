@@ -15,9 +15,8 @@ class FeedHandler(ViewHandler):
   def get(self, *args, **kwargs):
     # TODO: Sessionの定義をまとめる
     USER = "root"
-    PW = ""
     HOST = "localhost"
-    DB = "live_info_reader"
+    DB = "live_info_crawler"
     PW = os.environ['LIVE_INFO_PASSWORD']
     DATABASE = f'mysql://{USER}:{PW}@{HOST}/{DB}?charset=utf8'
     ENGINE = create_engine(
