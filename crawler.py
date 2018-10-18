@@ -48,11 +48,8 @@ def crawl():
     session.commit()
 
 
-# schedule.every().day.at("0:30").do(crawl)
-schedule.every().minute.do(crawl)
+schedule.every().day.at("0:30").do(crawl)
 
 while True:
     schedule.run_pending()
     time.sleep(1)
-
-
