@@ -9,6 +9,7 @@ from repositories.tables import Musician
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import (Column, String, Text, ForeignKey, \
                 create_engine, MetaData, DECIMAL, DATETIME, exc, event, Index)
+import os
 
 
 class MusicianHandler(ViewHandler):

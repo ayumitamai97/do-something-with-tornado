@@ -7,6 +7,7 @@ from models.live_info import LiveInfoModel
 from models.musician import MusicianModel
 from repositories.tables import LiveInfo
 from repositories.tables import Musician
+import os
 
 def crawl():
     # TODO まとめる
