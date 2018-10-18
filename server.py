@@ -5,24 +5,13 @@ import tornado.wsgi
 import wsgiref.simple_server
 from handlers.musician import MusicianHandler
 from handlers.feed import FeedHandler
-import schedule
-import time
-import crawler
+
 
 class MainHandler(tornado.web.RequestHandler):
     def get(self):
         self.render('templates/feed.html')
 
 
-# crawler
-schedule.every().day.at("0:30").do(crawler.crawl)
-
-while True:
-    schedule.run_pending()
-    time.sleep(1)
-
-
-# web server
 application = tornado.web.Application([
     (r"/", MainHandler),
     (r"/musicians", MusicianHandler),

@@ -7,6 +7,8 @@ from models.live_info import LiveInfoModel
 from models.musician import MusicianModel
 from repositories.tables import LiveInfo
 from repositories.tables import Musician
+import schedule
+import time
 import os
 
 def crawl():
@@ -44,3 +46,13 @@ def crawl():
         session.add(content)
 
     session.commit()
+
+
+# schedule.every().day.at("0:30").do(crawl)
+schedule.every().minute.do(crawl)
+
+while True:
+    schedule.run_pending()
+    time.sleep(1)
+
+
