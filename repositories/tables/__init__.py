@@ -17,7 +17,7 @@ DATABASE = f'mysql://{USER}:{PW}@{HOST}/{DB}?charset=utf8'
 ENGINE = create_engine(
     DATABASE,
     encoding="utf-8",
-    echo=True
+    echo=True  # Trueだと実行のたびにSQLが出力される
 )
 
 Session = scoped_session(sessionmaker(autocommit=False, autoflush=False, bind=ENGINE))
