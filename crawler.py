@@ -13,6 +13,7 @@ import os
 
 def crawl():
     # TODO まとめる
+    # TODO 環境変数名をもう少しわかりやすく
     USER = "root"
     HOST = os.environ['DB_HOSTNAME']
     DB = "live_info_crawler"
