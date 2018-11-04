@@ -10,7 +10,7 @@ from datetime import datetime
 import os
 
 USER = "root"
-HOST = "localhost"
+HOST = os.environ['DB_HOSTNAME']
 DB = "live_info_crawler"
 PW = os.environ['LIVE_INFO_PASSWORD']
 DATABASE = f'mysql://{USER}:{PW}@{HOST}/{DB}?charset=utf8'

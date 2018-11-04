@@ -19,7 +19,7 @@ class MusicianHandler(ViewHandler):
   def get(self, *args, **kwargs):
     # TODO: Sessionの定義をまとめる
     USER = "root"
-    HOST = "localhost"
+    HOST = os.environ['DB_HOSTNAME']
     DB = "live_info_crawler"
     PW = os.environ['LIVE_INFO_PASSWORD']
     DATABASE = f'mysql://{USER}:{PW}@{HOST}/{DB}?charset=utf8'
@@ -41,7 +41,7 @@ class MusicianHandler(ViewHandler):
 
 
     USER = "root"
-    HOST = "localhost"
+    HOST = os.environ['DB_HOSTNAME']
     DB = "live_info_crawler"
     PW = os.environ['LIVE_INFO_PASSWORD']
     DATABASE = f'mysql://{USER}:{PW}@{HOST}/{DB}?charset=utf8'

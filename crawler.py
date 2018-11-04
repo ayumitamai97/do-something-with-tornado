@@ -14,7 +14,7 @@ import os
 def crawl():
     # TODO まとめる
     USER = "root"
-    HOST = "localhost"
+    HOST = os.environ['DB_HOSTNAME']
     DB = "live_info_crawler"
     PW = os.environ['LIVE_INFO_PASSWORD']
     DATABASE = f'mysql://{USER}:{PW}@{HOST}/{DB}?charset=utf8'
@@ -46,7 +46,6 @@ def crawl():
         session.add(content)
 
     session.commit()
-
 
 schedule.every().day.at("0:30").do(crawl)
 
