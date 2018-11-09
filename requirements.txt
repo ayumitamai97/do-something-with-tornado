@@ -6,3 +6,4 @@ requests
 beautifulsoup4
 schedule
 os
+html5lib
