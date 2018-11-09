@@ -5,5 +5,4 @@ sqlalchemy>=sql1.2.10
 requests
 beautifulsoup4
 schedule
-os
 html5lib
