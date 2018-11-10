@@ -6,3 +6,4 @@ requests
 beautifulsoup4
 schedule
 html5lib
+htmllaundry

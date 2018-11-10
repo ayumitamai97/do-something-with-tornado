@@ -7,6 +7,7 @@ from models.live_info import LiveInfoModel
 from models.musician import MusicianModel
 from repositories.tables import LiveInfo
 from repositories.tables import Musician
+from htmllaundry import sanitize
 import schedule
 import time
 import os
@@ -35,15 +36,15 @@ def crawl():
 
         resp = requests.get(musician_url).text
         try:
-            soup = remove_tags(BeautifulSoup(resp, "lxml").get_text())
+            soup = sanitize(BeautifulSoup(resp, "lxml").get_text())
         except:
-            soup = remove_tags(BeautifulSoup(resp, "html5lib").get_text())
+            soup = sanitize(BeautifulSoup(resp, "html5lib").get_text())
 
         content = LiveInfo(
                     musician_id=musician_id,
                     content=soup,
                     created_at=date.today())
-
+        print("aaaaaaa")
         session.add(content)
 
     session.commit()
