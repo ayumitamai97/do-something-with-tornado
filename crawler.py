@@ -35,9 +35,9 @@ def crawl():
 
         resp = requests.get(musician_url).text
         try:
-            soup = BeautifulSoup(resp, "lxml").get_text()
+            soup = remove_tags(BeautifulSoup(resp, "lxml").get_text())
         except:
-            soup = BeautifulSoup(resp, "html5lib").get_text()
+            soup = remove_tags(BeautifulSoup(resp, "html5lib").get_text())
 
         content = LiveInfo(
                     musician_id=musician_id,
