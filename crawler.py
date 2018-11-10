@@ -44,13 +44,11 @@ def crawl():
                     musician_id=musician_id,
                     content=soup,
                     created_at=date.today())
-        print("aaaaaaa")
         session.add(content)
 
     session.commit()
 
-# schedule.every().day.at("0:30").do(crawl)
-schedule.every().minute.do(crawl)
+schedule.every().day.at("0:30").do(crawl)
 
 while True:
     schedule.run_pending()
