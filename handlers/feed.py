@@ -3,7 +3,7 @@ from typing import Callable, List, Optional, Any
 from tornado.web import HTTPError
 from tornado_json.requesthandlers import ViewHandler
 from repositories.tables import Musician
-from repositories.tables import LiveInfo
+from repositories.tables import UpdatedLiveInfo
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import (Column, String, Text, ForeignKey, \
                 create_engine, MetaData, DECIMAL, DATETIME, exc, event, Index)
@@ -34,12 +34,13 @@ class FeedHandler(ViewHandler):
     all_live_info = {}
 
     for musician_id in musician_ids:
-      live_info = session.query(LiveInfo).filter(LiveInfo.musician_id == musician_id).all()
-      live_info_today = str(live_info[0].content)
-      live_info_yesterday = str(live_info[1].content)
-      live_info_diff = live_info_today.replace(live_info_yesterday, "")
-      all_live_info[musician_id] = live_info_diff
+      live_info_list = session \
+                        .query(UpdatedLiveInfo) \
+                        .filter(UpdatedLiveInfo.musician_id == musician_id) \
+                        .order_by(UpdatedLiveInfo.created_at.desc()) \
+                        .all()
+      for live_info in live_info_list:
+        created_at = live_info.created_at
+        all_live_info[created_at] = { musician_id: live_info.content }
 
-      # pdb.set_trace() # debugger
-
-    return self.render("../templates/feed.html", live_info=live_info)
+    return self.render("../templates/feed.html", live_info=all_live_info)

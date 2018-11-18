@@ -27,18 +27,26 @@ Base = declarative_base()
 
 
 class Musician(Base):
-  """テーブル定義"""
   __tablename__ = 'musicians'
 
   id = Column(Integer, primary_key=True)
   name = Column(String(255))
   live_info_url = Column(String(255))
   live_info = relationship("LiveInfo")
+  updated_live_info = relationship("UpdatedLiveInfo")
 
 
 class LiveInfo(Base):
-  """テーブル定義"""
   __tablename__ = 'live_info'
+
+  id = Column(Integer, primary_key=True)
+  content = Column(Text(4294000000))
+  musician_id = Column(Integer, ForeignKey('musicians.id', onupdate='CASCADE', ondelete='CASCADE'))
+  created_at = Column(Date)
+
+
+class UpdatedLiveInfo(Base):
+  __tablename__ = 'updated_live_info'
 
   id = Column(Integer, primary_key=True)
   content = Column(Text(4294000000))
