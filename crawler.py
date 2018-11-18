@@ -48,10 +48,10 @@ def crawl():
     session.add(content)
 
   session.commit()
-  # arrange_updates()
+  arrange_updates()
 
 
-def arrange_updates_temp():
+def arrange_updates():
   USER = "root"
   HOST = os.environ['DB_HOSTNAME']
   DB = "live_info_crawler"
@@ -69,32 +69,30 @@ def arrange_updates_temp():
   musician_ids = list(map(lambda m: m.id, musicians))
 
   for musician_id in musician_ids:
-    for num in range(0, 9): # for文は一回のみ実行
-      live_info = session \
-                  .query(LiveInfo) \
-                  .filter(LiveInfo.musician_id == musician_id) \
-                  .order_by(LiveInfo.created_at.desc()) \
-                  .all()
+    live_info = session \
+                .query(LiveInfo) \
+                .filter(LiveInfo.musician_id == musician_id) \
+                .order_by(LiveInfo.created_at.desc()) \
+                .all()
 
-      live_info_today = str(live_info[num].content)
-      live_info_yesterday = str(live_info[num+1].content)
-      live_info_diff = live_info_today.replace(live_info_yesterday, "")
-      today = live_info[0].created_at
+    live_info_today = str(live_info[0].content)
+    live_info_yesterday = str(live_info[1].content)
+    live_info_diff = live_info_today.replace(live_info_yesterday, "")
+    today = live_info[0].created_at
 
-      if live_info_diff == "":
-        continue
+    if live_info_diff == "":
+      continue
 
-      content = LiveInfo(
-        musician_id=musician_id,
-        content=live_info_diff,
-        created_at=today)
+    content = LiveInfo(
+      musician_id=musician_id,
+      content=live_info_diff,
+      created_at=today)
 
-      session.add(content)
+    session.add(content)
 
   session.commit()
 
-arrange_updates_temp()
-# schedule.every().day.at("0:30").do(crawl)
+schedule.every().day.at("0:30").do(crawl)
 
 while True:
     schedule.run_pending()

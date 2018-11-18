@@ -19,11 +19,5 @@ application = tornado.web.Application([
 ])
 
 if __name__ == "__main__":
-    # development
-    application.listen(8080)
+    application.listen(80)
     tornado.ioloop.IOLoop.instance().start()
-
-    # production
-    wsgi_app = tornado.wsgi.WSGIAdapter(application)
-    server = wsgiref.simple_server.make_server('', 8080, wsgi_app)
-    server.serve_forever()
