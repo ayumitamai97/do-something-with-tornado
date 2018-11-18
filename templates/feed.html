@@ -5,6 +5,9 @@
     <title>Live Info Archive</title>
   </head>
   <body>
-    <p>this is feed</p>
+    {% for live in live_info %}
+      {{ live.content }}
+      {{ live.musician_id }}
+    {% end %}
   </body>
 </html>

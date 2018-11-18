@@ -13,9 +13,9 @@ class MainHandler(tornado.web.RequestHandler):
 
 
 application = tornado.web.Application([
-    (r"/", MainHandler),
-    (r"/musicians", MusicianHandler),
+    (r"/", FeedHandler),
     (r"/feed", FeedHandler),
+    (r"/musicians", MusicianHandler),
 ])
 
 if __name__ == "__main__":
