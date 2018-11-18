@@ -57,3 +57,7 @@ class UpdatedLiveInfo(Base):
 if __name__ == "__main__":
     # create table
     Base.metadata.create_all(ENGINE)
+
+
+# HOW TO DUMP
+# mysqldump -u root -h localhost live_info_crawler > mysqldump.sql
