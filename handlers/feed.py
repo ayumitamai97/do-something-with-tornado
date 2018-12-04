@@ -43,7 +43,6 @@ class FeedHandler(ViewHandler):
                         .order_by(UpdatedLiveInfo.created_at.desc()) \
                         .all()
 
-      pdb.set_trace()
       for live_info in live_info_list:
         created_at = str(live_info.created_at)
         jscontent = re.findall(r'(.*\(.*\);.*|.*\{.*\}.*|.+=.+;|\n{2,}|<[a-z]+>)', live_info.content)
