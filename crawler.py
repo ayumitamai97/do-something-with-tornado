@@ -95,7 +95,6 @@ def arrange_updates():
   session.commit()
 
 schedule.every().day.at("0:30").do(crawl)
-schedule.every().day.at("1:30").do(arrange_updates)
 
 while True:
     schedule.run_pending()
