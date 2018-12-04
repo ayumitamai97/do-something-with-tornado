@@ -6,6 +6,7 @@ from sqlalchemy.orm import sessionmaker
 from models.live_info import LiveInfoModel
 from models.musician import MusicianModel
 from repositories.tables import LiveInfo
+from repositories.tables import UpdatedLiveInfo
 from repositories.tables import Musician
 from htmllaundry import sanitize
 import schedule
@@ -77,13 +78,14 @@ def arrange_updates():
 
     live_info_today = str(live_info[0].content)
     live_info_yesterday = str(live_info[1].content)
+
     live_info_diff = live_info_today.replace(live_info_yesterday, "")
     today = live_info[0].created_at
 
     if live_info_diff == "":
       continue
 
-    content = LiveInfo(
+    content = UpdatedLiveInfo(
       musician_id=musician_id,
       content=live_info_diff,
       created_at=today)
@@ -93,6 +95,7 @@ def arrange_updates():
   session.commit()
 
 schedule.every().day.at("0:30").do(crawl)
+schedule.every().day.at("1:30").do(arrange_updates)
 
 while True:
     schedule.run_pending()
