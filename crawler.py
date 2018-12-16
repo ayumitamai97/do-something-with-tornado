@@ -99,7 +99,6 @@ def arrange_updates():
 
   session.commit()
 
-crawl()
 schedule.every().day.at("0:30").do(crawl)
 
 while True:
