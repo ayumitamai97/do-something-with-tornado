@@ -1,13 +1,17 @@
 # -*- encoding:utf-8 -*-
 
-from sqlalchemy import (Column, String, Text, Date, ForeignKey, \
-                create_engine, MetaData, DECIMAL, DATETIME, exc, event, Index)
-from sqlalchemy.schema import UniqueConstraint
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
 from sqlalchemy.orm import (sessionmaker, relationship, scoped_session)
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.dialects.mysql import INTEGER as Integer
+from sqlalchemy import (Column, String, Text, Date, ForeignKey, \
+                create_engine, MetaData, DECIMAL, DATETIME, exc, event, Index)
+from sqlalchemy.schema import UniqueConstraint
 from datetime import datetime
 import os
+from logging import getLogger
+from time import sleep
 
 USER = "root"
 HOST = os.environ['DB_HOSTNAME']

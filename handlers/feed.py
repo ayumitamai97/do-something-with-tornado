@@ -2,6 +2,7 @@ from typing import Callable, List, Optional, Any
 
 from tornado.web import HTTPError
 from tornado_json.requesthandlers import ViewHandler
+from repositories.tables import Session
 from repositories.tables import Musician
 from repositories.tables import UpdatedLiveInfo
 from sqlalchemy.orm import sessionmaker
@@ -16,17 +17,6 @@ class FeedHandler(ViewHandler):
     pass
 
   def get(self, *args, **kwargs):
-    # TODO: Sessionの定義をまとめる
-    USER = "root"
-    HOST = os.environ['DB_HOSTNAME']
-    DB = "live_info_crawler"
-    PW = os.environ['LIVE_INFO_PASSWORD']
-    DATABASE = f'mysql://{USER}:{PW}@{HOST}/{DB}?charset=utf8'
-    ENGINE = create_engine(
-        DATABASE,
-        encoding="utf-8"
-    )
-    Session = sessionmaker(bind=ENGINE)
     session = Session()
 
     musicians_query = session.query(Musician)

@@ -4,11 +4,7 @@ from typing import Callable, List, Optional, Any
 from tornado.web import HTTPError
 from tornado_json.requesthandlers import ViewHandler
 from repositories.tables import Musician
-
-# TODO: まとめる
-from sqlalchemy.orm import sessionmaker
-from sqlalchemy import (Column, String, Text, ForeignKey, \
-                create_engine, MetaData, DECIMAL, DATETIME, exc, event, Index)
+from repositories.tables import Session
 import os
 
 
@@ -17,18 +13,6 @@ class MusicianHandler(ViewHandler):
     pass
 
   def get(self, *args, **kwargs):
-    # TODO: Sessionの定義をまとめる
-    USER = "root"
-    HOST = os.environ['DB_HOSTNAME']
-    DB = "live_info_crawler"
-    PW = os.environ['LIVE_INFO_PASSWORD']
-    DATABASE = f'mysql://{USER}:{PW}@{HOST}/{DB}?charset=utf8'
-    ENGINE = create_engine(
-        DATABASE,
-        encoding="utf-8"
-    )
-    Session = sessionmaker(bind=ENGINE)
-
     session = Session()
 
     musicians = session.query(Musician).all()      
@@ -39,17 +23,6 @@ class MusicianHandler(ViewHandler):
     musician_url = self.get_body_argument("url")
     musician = Musician(name=musician_name, live_info_url=musician_url)
 
-
-    USER = "root"
-    HOST = os.environ['DB_HOSTNAME']
-    DB = "live_info_crawler"
-    PW = os.environ['LIVE_INFO_PASSWORD']
-    DATABASE = f'mysql://{USER}:{PW}@{HOST}/{DB}?charset=utf8'
-    ENGINE = create_engine(
-        DATABASE,
-        encoding="utf-8"
-    )
-    Session = sessionmaker(bind=ENGINE)
     session = Session()
     session.add(musician)
     session.commit()
