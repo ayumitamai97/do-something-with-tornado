@@ -13,6 +13,7 @@ import schedule
 import time
 import os
 import pdb
+import re
 
 def crawl():
   # TODO まとめる
@@ -79,7 +80,7 @@ def arrange_updates():
     live_info_today = str(live_info[0].content)
     live_info_yesterday = str(live_info[1].content)
 
-    live_info_diff = live_info_today.replace(live_info_yesterday, "")
+    live_info_diff = re.findall(r'(.*\(.*\);.*|.*\{.*\}.*|.+=.+;|\n{2,}|<[a-z]+>)', live_info_today.replace(live_info_yesterday, ""))
     today = live_info[0].created_at
 
     if live_info_diff == "":
