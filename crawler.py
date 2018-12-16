@@ -47,6 +47,7 @@ def crawl():
                 musician_id=musician_id,
                 content=soup,
                 created_at=date.today())
+
     session.add(content)
 
   session.commit()
@@ -80,7 +81,10 @@ def arrange_updates():
     live_info_today = str(live_info[0].content)
     live_info_yesterday = str(live_info[1].content)
 
-    live_info_diff = re.findall(r'(.*\(.*\);.*|.*\{.*\}.*|.+=.+;|\n{2,}|<[a-z]+>)', live_info_today.replace(live_info_yesterday, ""))
+    live_info_diff = "".join(re.findall(
+                     r'(.*\(.*\);.*|.*\{.*\}.*|.+=.+;|\n{2,}|<[a-z]+>)',
+                     live_info_today.replace(live_info_yesterday, "")
+                     ))
     today = live_info[0].created_at
 
     if live_info_diff == "":
@@ -95,6 +99,7 @@ def arrange_updates():
 
   session.commit()
 
+crawl()
 schedule.every().day.at("0:30").do(crawl)
 
 while True:
