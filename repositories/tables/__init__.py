@@ -13,9 +13,9 @@ import os
 from logging import getLogger
 from time import sleep
 
-USER = "root"
-HOST = os.environ['DB_HOSTNAME']
-DB = "live_info_crawler"
+USER = os.environ['LIVE_INFO_DB_USERNAME']
+HOST = os.environ['LIVE_INFO_DB_HOSTNAME']
+DB = os.environ['LIVE_INFO_DBNAME']
 PW = os.environ['LIVE_INFO_PASSWORD']
 DATABASE = f'mysql://{USER}:{PW}@{HOST}/{DB}?charset=utf8'
 ENGINE = create_engine(
