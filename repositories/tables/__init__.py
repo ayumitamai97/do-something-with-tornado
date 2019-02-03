@@ -15,9 +15,9 @@ from time import sleep
 
 USER = os.environ['LIVE_INFO_DB_USERNAME']
 HOST = os.environ['LIVE_INFO_DB_HOSTNAME']
+PW = os.environ['LIVE_INFO_DB_PASSWORD']
 DB = os.environ['LIVE_INFO_DBNAME']
-PW = os.environ['LIVE_INFO_PASSWORD']
-DATABASE = f'mysql://{USER}:{PW}@{HOST}/{DB}?charset=utf8'
+DATABASE = 'mysql://{USER}:{PW}@{HOST}/{DB}?charset=utf8'
 ENGINE = create_engine(
     DATABASE,
     encoding="utf-8",
